@@ -1,0 +1,92 @@
+<style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+</style>
+<h1>Properties index page</h1>
+
+<% if @properties != nil && @properties.size > 0%>
+	<table>
+		<tr>
+			<th>id</th>
+			<th>Property name</th>
+			<th>Address</th>
+			<th>Tenant Name</th>
+			<th>Tenant email</th>
+			<th>Tenant Phone# </th>
+			<th>Security Deposit </th>
+			<th>Rent </th>
+			<th>Lease Starting Data</th>
+			<th>Lease Ending Data</th>
+			<th>Managed by</th>
+			<th></th>
+		</tr>
+		<%@properties.each do |p|%>
+			<tr>
+				<td><%=p.id%></td>
+				<td><%=p.name%></td>
+				<td><%=p.address%></td>
+				<td><% if p.tenant_name == nil || p.tenant_name == ""%>
+						N/A
+					<%else%>
+						<%=p.tenant_name%>
+					<%end%></td>
+				<td><% if p.tenant_email == nil || p.tenant_email == ""%>
+						N/A
+					<%else%>
+						<%=p.tenant_email%>
+					<%end%></td>
+				<td><% if p.tenant_phone_number == nil || p.tenant_phone_number == ""%>
+						N/A
+					<%else%>
+						<%=p.tenant_email%>
+					<%end%></td>
+				<td><% if p.security_deposit == nil || p.security_deposit == ""%>
+						N/A
+					<%else%>
+						<%=p.security_deposit%>
+					<%end%></td>	
+				<td><% if p.rent == nil || p.rent == ""%>
+						N/A
+					<%else%>
+						<%=p.rent%>
+					<%end%></td>
+				<td><% if p.lease_starting_date == nil || p.lease_starting_date == ""%>
+						N/A
+					<%else%>
+						<%=p.lease_starting_date%>
+					<%end%></td>
+				<td><% if p.lease_ending_date == nil || p.lease_ending_date == ""%>
+						N/A
+					<%else%>
+						<%=p.lease_ending_date%>
+					<%end%></td>
+				<td><% if p.user == nil%>
+						N/A
+					<%else%>
+						<%=p.user.email%>
+					<%end%></td>
+				<td><a href="/properties/<%=p.id%>/edit">Edit</a></td>									
+			</tr>
+		<%end%>
+	</table>
+<%end%>
+<br><br>
+<!--
+<% if @properties != nil && @properties.size > 0%>
+	<%@properties.each do |p|%>
+		<input type="radio" name="id" value="<%=p.id%>"><%=p.name%>
+	<%end%>
+	<form action="/properties/:id/edit" method="post">
+		<input type="hidden" name="_method" value="patch">
+		<input type="submit" name="edit" value="Edit">
+	</form>
+	<form action="/properties/:id/delete" method="post">
+		<input type="hidden" name="_method" value="delete">
+		<input type="submit" name="delete" value="Delete">
+	</form>
+
+<%end%>
+-->
+

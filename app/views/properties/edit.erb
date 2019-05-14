@@ -1,0 +1,34 @@
+<style>
+  .tab {margin-left: 40px;
+  }
+</style>
+
+<h1>Edit Property <=%@property.name%></h1>
+<form action="/properties" method="post">
+	<input type="hidden" name="_method" value="patch">
+	<label>Tenant:</label>
+		<label class="tab">Name:</label>
+			<input class="tab" type="text" name="tenant_name" value="<%=@property.tenant_name%>">
+		<labe class="tab">Email:</labe>
+			<input class="tab" type="emai." name="tenant_email" value="<%=@property.tenant_email%>">
+		<label class="tab">Phone #:</label>
+			<input class="tab" type="text" name="tenant_phone_number" value="<%=@property.tenant_phone_number%>">
+	<label>Security Deposit: </label>
+		<input type="number" name="security_deposit" value="<%=@property.security_deposit%>">
+	<label>Rent:</label>
+		<input type="number" name="rent" value="<%=@property.rent%>">
+	<label>Lease Starting Date: </label>
+		<input type="text" name="lease_starting_date" value="<%=@property.lease_starting_date%>">
+	<label>Lease Ending Date: </label>
+		<input type="text" name="lease_ending_date" value="<%=@property.lease_ending_date%>">
+	<label>Managed by: </label>
+<!--
+		<% if @is_admin%>
+			<input type="radio" name="pm_name" value="<%=@property.user.email%>">
+		<%else%>
+			<input type="text" name="pm_name" value="<%=@property.user.email%>" readonly>
+		<%end%>
+-->
+</form>
+
+

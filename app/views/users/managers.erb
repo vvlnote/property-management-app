@@ -1,0 +1,24 @@
+<style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+</style>
+<h1>Property Managers</h1>
+<%if @managers != nil && @managers.size > 0%>
+	<table>
+		<tr>
+			<th>PM name</th>
+			<th>email</th>
+			<th>admin</th>
+		</tr>
+	
+		<%@managers.each do |pm|%> 
+			<tr>
+				<td><%=pm.user_name%></td>
+				<td><%=pm.email%></td>
+				<td><%=pm.is_admin%></td>
+			</tr>
+		<%end%>
+	</table>
+<%end%>
