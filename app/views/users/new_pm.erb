@@ -7,7 +7,7 @@
 	<% if @properties != nil && @properties.size > 0%>
 		<label style="font-size:18px">Properties for management:</label><br>
 		<%@properties.each do |property|%>
-			<%if property.user_id == nil || property.user_id == ""%>
+			<%if property.user == nil %>
 				<input type="checkbox" name="property_name_<%=property.id%>" value="<%=property.name%>"><%=property.name%>
 				<br>
 			<%end%>

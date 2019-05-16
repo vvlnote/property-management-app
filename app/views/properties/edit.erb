@@ -4,7 +4,7 @@
 </style>
 
 <h1>Edit Property <%=@property.name%></h1>
-<form action="/properties" method="post">
+<form action="/properties/<%=@property.id %>" method="post">
 	<input type="hidden" name="_method" value="patch">
 	<label>Tenant:</label><br>
 		<label class="tab">Name:</label>
@@ -26,17 +26,7 @@
 		<input type="text" name="lease_ending_date" value="<%=@property.lease_ending_date%>">
 	<br><br>
 	<label>Managed by: </label>
-<!--
-		<% if @is_admin%>
-			<% if @property.user != nil %>
-				<input type="radio" name="pm_name" value="<%=@property.user.email%>">
-			<%end%>
-		<%else%>
-			<% if @property.user != nil %>
-				<input type="text" name="pm_name" value="<%=@property.user.email%>" readonly>
-			<%end%>
-		<%end%>
--->
+		<input type="checkbox" name="user_name" valus="<%=@pm.email%>" checked><%=@pm.user_name%>
 	<br><br><br>
 	<input type="submit" value="Update">
 </form>

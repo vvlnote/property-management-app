@@ -1,0 +1,19 @@
+<style>
+  .tab {margin-left: 40px;
+  }
+</style>
+<h2>Property <%=@property.name%></h2><br>
+<label>address: </label> <%=@property.address%><br>
+<label>Tenant Name: </label> <%=@property.tenant_name%><br>
+<label class="tab">	Email: </label> <%=@property.tenant_email%><br>
+<label class="tab">	Phone Number: </label> <%=@property.tenant_phone_number%><br>
+<label>Rent: </label><%=@property.rent%><br>
+<label>Security Deposit: </label><%=@property.security_deposit%><br>
+<label>Lease:</label><br>
+<label class="tab">		starting date: </label><%=@property.lease_starting_date%><br>
+<label class="tab">		ending date: </label><%=@property.lease_ending_date%><br><br>
+<% if @property.user != nil %>
+	<label>Managed by: </label><%=@property.user.user_name%>
+<%end%>
+
+

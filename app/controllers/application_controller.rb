@@ -25,10 +25,6 @@ class ApplicationController < Sinatra::Base
   		!!session[:user_id]
   	end
 
-  	def is_admin?
-  		!!session[:is_admin]
-  	end
-
   	def current_user
   		User.find(session[:user_id])
   	end

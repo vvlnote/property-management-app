@@ -4,7 +4,7 @@
 <p>Set up <a href="/admin/managers/new">New Property Manager</a></p>
 <%if @property_managers.size > 0%>
 	<p>Edit the property managers</p>
-	<%property_managers.each do |pm|%>
+	<%@property_managers.each do |pm|%>
 		<input type="radio" name="email" value="<%=pm.email%>"><br>
 	<%end%>
 <%end%>

@@ -4,12 +4,11 @@
     border-collapse: collapse;
   }
 </style>
-<h1>Properties index page</h1>
+<h2>Properties are managed by <%=@pm.user_name%> or are not under managing</h2>
 
 <% if @properties != nil && @properties.size > 0%>
 	<table>
 		<tr>
-			<th>id</th>
 			<th>Property name</th>
 			<th>Address</th>
 			<th>Tenant Name</th>
@@ -21,10 +20,10 @@
 			<th>Lease Ending Data</th>
 			<th>Managed by</th>
 			<th></th>
+			<th></th>
 		</tr>
 		<%@properties.each do |p|%>
 			<tr>
-				<td><%=p.id%></td>
 				<td><%=p.name%></td>
 				<td><%=p.address%></td>
 				<td><% if p.tenant_name == nil || p.tenant_name == ""%>
@@ -40,17 +39,17 @@
 				<td><% if p.tenant_phone_number == nil || p.tenant_phone_number == ""%>
 						N/A
 					<%else%>
-						<%=p.tenant_email%>
+						<%=p.tenant_phone_number%>
 					<%end%></td>
 				<td><% if p.security_deposit == nil || p.security_deposit == ""%>
 						N/A
 					<%else%>
-						<%=p.security_deposit%>
+						$<%=p.security_deposit%>
 					<%end%></td>	
 				<td><% if p.rent == nil || p.rent == ""%>
 						N/A
 					<%else%>
-						<%=p.rent%>
+						$<%=p.rent%>
 					<%end%></td>
 				<td><% if p.lease_starting_date == nil || p.lease_starting_date == ""%>
 						N/A
@@ -65,13 +64,19 @@
 				<td><% if p.user == nil%>
 						N/A
 					<%else%>
-						<%=p.user.email%>
+						<%=p.user.user_name%>
 					<%end%></td>
-				<td><a href="/properties/<%=p.id%>/edit">Edit</a></td>									
+				<td><a href="/properties/<%=p.id%>/edit">Edit</a></td>
+				<td><form action="/properties/<%=p.id%>" method="post">
+					<input type="hidden" name="_method" value="delete">
+					<input type="submit" value="Delete">
+				</form></td>									
 			</tr>
 		<%end%>
 	</table>
 <%end%>
+<br><br>
+<a href="/properties/new">Add Property</a>
 <br><br>
 <!--
 <% if @properties != nil && @properties.size > 0%>

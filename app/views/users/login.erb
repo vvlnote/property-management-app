@@ -2,10 +2,8 @@
 
 <form action="/login" method="post">
 	<label>email: </label>
-		<%@users.each do |user|%>
-			<input type="radio" name="email" value="<%=user.email%>"><%=user.email%>
-		<%end%>
-		<br>
+		<input type="email" name="email">
+	<br>
 	<label>password:</label>
 	<input type=text name=password><br><br>
 	<input type=submit value="Log in">

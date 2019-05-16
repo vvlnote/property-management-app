@@ -1,14 +1,12 @@
-<h1>Add a property</h1>
+<h1>Add a property by <%=@pm.user_name%></h1>
 
 <form action="/properties" method="post">
 	<label>Property Name:</label>
 		<input type="text" name="name" required><br>
 	<label>Address:</label>
 		<input type="text" name="address" required><br>
-	<label>Managed by:</label><%=@pms.size%>
-		<%@pms.each do |pm|%> 
-			<input type="radio" name="email" value="<%=pm.email%>">
-		<%end%>
+	<label>Managed by:</label>
+		<input type="checkbox" name="user_name" valus="<%=@pm.email%>" checked><%=@pm.user_name%>
 	<br>
 	<label>Tenant:</label>
 	<label>name:<input type="text" name="tenant_name"></label>
