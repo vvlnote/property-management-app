@@ -63,9 +63,13 @@ class PropertiesController < ApplicationController
 	end
 
 	get '/properties/:id' do
-		@property = Property.find(params[:id].to_i)
-		@pm = User.find(session[:user_id])
-		erb :"/properties/show"
+		if Property.exists?(params[:id].to_i)
+			@property = Property.find(params[:id].to_i)
+			@pm = User.find(session[:user_id])
+			erb :"/properties/show"
+		else
+			flash[:proeprty_not_exit] = "This property #{params[:id]} has been deleted! It is not a valid ID."
+		end
 	end
 
 	delete '/properties/:id' do
