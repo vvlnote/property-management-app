@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
 	get '/signup' do
-		binding.pry
+		if logged_in? #make sure it is log out
+			session.destroy
+		end	
 		if !session[:user_id]
 			erb :'users/new'
 		else
@@ -10,7 +12,7 @@ class UsersController < ApplicationController
 	end
 
 	post '/signup' do
-		binding.pry
+		
 		if params[:password] == "" || params[:email] ==""
 			flash[:missing_pw_email] = "Please type in the password and email in order to complete sign up!"
 			redirect to '/signup'
@@ -18,10 +20,15 @@ class UsersController < ApplicationController
 			if params[:user_name] == ""
 				params[:user_name] = params[:email]
 			end
-			user = User.create(:user_name => params[:user_name], 
+			user = User.find_by(:email == params[:email])
+			if user
+				flash[:user_existing] = "#{params[:email]} is existed, please type in another email address, or go to log in page!"
+			else
+				user = User.create(:user_name => params[:user_name], 
 				:password => params[:password], :email => params[:email])
-			session[:user_id] = user.id
-			redirect '/properties'
+				session[:user_id] = user.id
+				redirect '/properties'
+			end
 		end
 	end
 
@@ -30,18 +37,18 @@ class UsersController < ApplicationController
 	end
 
 	post '/login' do
-		binding.pry
+		
 		user = User.find_by(:email => params[:email])
-		binding.pry
+		
 		if user && user.authenticate(params[:password])
 			session[:user_id] = user.id
-			binding.pry
+			
 		redirect to 'properties'
 		elsif user == nil
 			flash[:incorrect_login_name] = "#{params[:email]} is not recognized, please reenter the registered email, or go the the signup page!"
 		else
 			flash[:incorrect_password] = "Your password is not correct, please reenter it."
-			binding.pry
+			
 			redirect to '/login'
 		end
 

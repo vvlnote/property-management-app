@@ -3,7 +3,7 @@ class PropertiesController < ApplicationController
 	get '/properties' do 
 		redirect_if_not_logged_in
 
-		binding.pry
+		
 
 		@properties = []
 		@pm = User.find(session[:user_id])
@@ -13,7 +13,7 @@ class PropertiesController < ApplicationController
 			end
 		end
 
-		binding.pry
+		
 		erb :'/properties/index'
 	end
 
@@ -24,23 +24,23 @@ class PropertiesController < ApplicationController
 	end
 
 	post '/properties' do
-		binding.pry
+		
 		property = Property.create(:name => params[:name], :address => params[:address])
 		if params.has_key?("user_name")
 			user = User.find(session[:user_id])
 			property.user = user
 			property.save
 		end
-		binding.pry
+		
 		redirect to '/properties'
 	end
 
 	get '/properties/:id/edit' do
-		binding.pry
+		
 		redirect_if_not_logged_in
 		@property = Property.find(params[:id].to_i)
 		@pm = User.find(session[:user_id])
-		binding.pry
+		
 		erb :"/properties/edit"
 	end
 
@@ -58,7 +58,7 @@ class PropertiesController < ApplicationController
 			property.user = user
 		end
 		property.save
-		binding.pry
+		
 		redirect "/properties/#{params[:id]}"
 	end
 
